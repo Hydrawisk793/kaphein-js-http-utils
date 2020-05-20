@@ -6,7 +6,7 @@
     "license": "MIT",
     "main": "src/index.js",
     "scripts": {
-        "lint": "eslint src/* --ext .js",
+        "lint": "tsc --project tsconfig.dts.json && eslint src/**/*.js",
         "lint:fix": "npm run lint -- --fix",
         "test": "mocha tests"
     },
