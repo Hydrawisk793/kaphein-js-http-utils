@@ -1,0 +1,23 @@
+{
+    "name": "kaphein-js-http-utils",
+    "version": "0.1.0",
+    "description": "",
+    "author": "Hydrawisk793",
+    "license": "MIT",
+    "main": "src/index.js",
+    "scripts": {
+        "lint": "eslint src/* --ext .js",
+        "lint:fix": "npm run lint -- --fix",
+        "test": "mocha tests"
+    },
+    "bundleDependencies": [],
+    "dependencies": {
+        "kaphein-js": "^0.6.0"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "eslint": "^7.0.0",
+        "mocha": "^7.1.2",
+        "typescript": "^3.9.3"
+    }
+}
