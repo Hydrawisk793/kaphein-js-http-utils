@@ -17,6 +17,7 @@
     "devDependencies": {
         "chai": "^4.2.0",
         "eslint": "^7.0.0",
+        "husky": "^2.7.0",
         "mocha": "^7.1.2",
         "typescript": "^3.9.3"
     }
