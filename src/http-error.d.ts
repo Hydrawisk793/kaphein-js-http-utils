@@ -25,6 +25,11 @@ export declare class HttpError extends Error
         message : string
     );
 
+    /**
+     *  @param body A HTTP response body.  
+     *  Any `undefined` values will be treated as a `null` value.  
+     *  The body will not be cloned but referenced by the error object.
+     */
     public constructor(
         status : number,
         headers : Record<string, string> | Iterable<[string, string]> | null,

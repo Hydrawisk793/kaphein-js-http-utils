@@ -30,7 +30,7 @@ module.exports = (function ()
 
                     this.status = arguments[0].status;
                     this.headers = new HttpHeaderMap(arguments[0].headers);
-                    this.body = Object.assign({}, arguments[0].body);
+                    this.body = arguments[0].body;
                 }
                 else if(arguments[0] instanceof Error)
                 {
