@@ -12,7 +12,7 @@
     },
     "bundleDependencies": [],
     "dependencies": {
-        "kaphein-js": "^0.6.0"
+        "kaphein-js": "^0.7.0"
     },
     "devDependencies": {
         "chai": "^4.2.0",
