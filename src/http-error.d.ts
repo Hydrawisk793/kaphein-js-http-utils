@@ -1,3 +1,5 @@
+import { HttpHeaderMap } from "./http-header-map";
+
 export declare class HttpError extends Error
 {
     public constructor();
@@ -25,13 +27,13 @@ export declare class HttpError extends Error
 
     public constructor(
         status : number,
-        headers : Record<string, string> | null,
+        headers : Record<string, string> | Iterable<[string, string]> | null,
         body : any
     );
 
     public readonly status : number;
 
-    public readonly headers : Record<string, string>;
+    public readonly headers : HttpHeaderMap;
 
     public readonly body : any;
 }

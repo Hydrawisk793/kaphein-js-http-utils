@@ -1,6 +1,7 @@
 var extendClass = require("kaphein-js").extendClass;
 var isUndefinedOrNull = require("kaphein-js").isUndefinedOrNull;
 var isString = require("kaphein-js").isString;
+var HttpHeaderMap = require("./http-header-map").HttpHeaderMap;
 
 module.exports = (function ()
 {
@@ -28,7 +29,7 @@ module.exports = (function ()
                     Error.call(this, arguments[0].message);
 
                     this.status = arguments[0].status;
-                    this.headers = Object.assign({}, arguments[0].headers);
+                    this.headers = new HttpHeaderMap(arguments[0].headers);
                     this.body = Object.assign({}, arguments[0].body);
                 }
                 else if(arguments[0] instanceof Error)
@@ -68,7 +69,7 @@ module.exports = (function ()
                 Error.call(this, "A HTTP request has failed with status " + arguments[0] + ".");
 
                 this.status = arguments[0];
-                this.headers = Object.assign({}, arguments[1]);
+                this.headers = new HttpHeaderMap(arguments[1]);
                 this.body = (isUndefinedOrNull(arguments[2]) ? null : arguments[2]);
                 break;
             default:
@@ -85,9 +86,9 @@ module.exports = (function ()
         {
             status : 400,
 
-            headers : null,
+            /** @type {HttpHeaderMap} */headers : null,
 
-            body : null
+            /** @type {any} */body : null
         }
     );
 
@@ -111,9 +112,9 @@ module.exports = (function ()
         Error.call(thisRef, message);
 
         thisRef.status = status;
-        thisRef.headers = {
-            "Content-Type" : mineTypeText
-        };
+        thisRef.headers = new HttpHeaderMap({
+            "content-type" : mineTypeText
+        });
         thisRef.body = message;
     }
 

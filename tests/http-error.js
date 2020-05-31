@@ -28,7 +28,7 @@ describe("HttpError", function ()
 
         it("should set 'Content-Type' header and body.", function ()
         {
-            assert.equal(res.headers["Content-Type"], mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
+            assert.equal(res.headers.get("Content-Type"), mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
             assert.isString(res.body, "'body' must be a string.");
         });
     });
@@ -44,7 +44,7 @@ describe("HttpError", function ()
 
         it("should set 'Content-Type' header and body.", function ()
         {
-            assert.equal(res.headers["Content-Type"], mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
+            assert.equal(res.headers.get("Content-Type"), mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
             assert.isString(res.body, "'body' must be a string.");
         });
     });
@@ -61,7 +61,7 @@ describe("HttpError", function ()
 
         it("should set 'Content-Type' header and body.", function ()
         {
-            assert.equal(res.headers["Content-Type"], mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
+            assert.equal(res.headers.get("Content-Type"), mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
             assert.isString(res.body, "'body' must be a string.");
             assert.equal(res.body, msg, `'body' must be equal to '${ msg }'.`);
         });
@@ -80,7 +80,7 @@ describe("HttpError", function ()
 
         it("should set 'Content-Type' header and body.", function ()
         {
-            assert.equal(res.headers["Content-Type"], mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
+            assert.equal(res.headers.get("Content-Type"), mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
             assert.isString(res.body, "'body' must be a string.");
             assert.equal(res.body, msg, `'body' must be equal to '${ msg }'.`);
         });
@@ -107,9 +107,8 @@ describe("HttpError", function ()
 
         it("should set 'Content-Type' header and body.", function ()
         {
-            assert.notEqual(res.headers, headers, "headers must be shallow-cloned.");
-            assert.equal(res.headers["Content-Type"], headers["Content-Type"], `'${ "Content-Type" }' must be '${ headers["Content-Type"] }'.`);
-            assert.deepEqual(res.headers, headers, `'headers' must be deep-equal to '${ headers }'.`);
+            assert.notEqual(res.headers.toRecord("train"), headers, "headers must be cloned.");
+            assert.deepEqual(res.headers.toRecord("train"), headers, `'headers' must be deep-equal to '${ headers }'.`);
 
             assert.isObject(res.body, "'body' must be an object.");
             assert.deepEqual(res.body, body, `'body' must be deep-equal to '${ body }'.`);
@@ -135,7 +134,7 @@ describe("HttpError", function ()
         it("should equal to the original.", function ()
         {
             assert.deepEqual(copyOfRes.status, res.status, `'status' must be ${ status }.`);
-            assert.deepEqual(copyOfRes.headers, res.headers, `'headers' must be deep-equal to '${ headers }'.`);
+            assert.deepEqual(copyOfRes.headers.toRecord(), res.headers.toRecord(), `'headers' must be deep-equal to '${ headers }'.`);
             assert.deepEqual(copyOfRes.body, res.body, `'body' must be deep-equal to '${ body }'.`);
         });
     });
@@ -152,7 +151,7 @@ describe("HttpError", function ()
 
         it("should set 'Content-Type' header and body.", function ()
         {
-            assert.equal(res.headers["Content-Type"], mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
+            assert.equal(res.headers.get("Content-Type"), mineTypeTextPlain, `'${ "Content-Type" }' must be '${ mineTypeTextPlain }'.`);
             assert.isString(res.body, "'body' must be a string.");
             assert.equal(res.body, error.message, `'body' must be equal to '${ error.message }'.`);
         });
