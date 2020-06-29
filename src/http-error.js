@@ -14,6 +14,8 @@ module.exports = (function ()
          */
         function HttpError()
         {
+            var message = "";
+
             switch(arguments.length)
             {
             case 0:
@@ -26,7 +28,9 @@ module.exports = (function ()
             case 1:
                 if(arguments[0] instanceof HttpError)
                 {
-                    Error.call(this, arguments[0].message);
+                    message = arguments[0].message;
+                    Error.call(this, message);
+                    this.message = message;
 
                     this.status = arguments[0].status;
                     this.headers = new HttpHeaderMap(arguments[0].headers);
@@ -66,7 +70,9 @@ module.exports = (function ()
                     throw new TypeError("'status' must be a safe integer.");
                 }
 
-                Error.call(this, "A HTTP request has failed with status " + arguments[0] + ".");
+                message = "A HTTP request has failed with status " + arguments[0] + ".";
+                Error.call(this, message);
+                this.message = message;
 
                 this.status = arguments[0];
                 this.headers = new HttpHeaderMap(arguments[1]);
@@ -110,6 +116,7 @@ module.exports = (function ()
         }
 
         Error.call(thisRef, message);
+        thisRef.message = message;
 
         thisRef.status = status;
         thisRef.headers = new HttpHeaderMap({
