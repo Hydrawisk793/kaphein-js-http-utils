@@ -14,6 +14,8 @@ module.exports = (function ()
          */
         function HttpError()
         {
+            var message = "";
+
             switch(arguments.length)
             {
             case 0:
@@ -26,7 +28,9 @@ module.exports = (function ()
             case 1:
                 if(arguments[0] instanceof HttpError)
                 {
-                    Error.call(this, arguments[0].message);
+                    message = arguments[0].message;
+                    Error.call(this, message);
+                    this.message = message;
 
                     this.status = arguments[0].status;
                     this.headers = new HttpHeaderMap(arguments[0].headers);
@@ -66,11 +70,31 @@ module.exports = (function ()
                     throw new TypeError("'status' must be a safe integer.");
                 }
 
-                Error.call(this, "A HTTP request has failed with status " + arguments[0] + ".");
+                message = "A HTTP request has failed with status " + arguments[0] + ".";
+                Error.call(this, message);
+                this.message = message;
 
                 this.status = arguments[0];
                 this.headers = new HttpHeaderMap(arguments[1]);
                 this.body = (isUndefinedOrNull(arguments[2]) ? null : arguments[2]);
+                break;
+            case 4:
+                if(!Number.isSafeInteger(arguments[0]))
+                {
+                    throw new TypeError("'status' must be a safe integer.");
+                }
+
+                message = arguments[1];
+                if(!isString(message))
+                {
+                    throw new TypeError("'message', must be a string");
+                }
+                Error.call(this, message);
+                this.message = message;
+
+                this.status = arguments[0];
+                this.headers = new HttpHeaderMap(arguments[2]);
+                this.body = (isUndefinedOrNull(arguments[3]) ? null : arguments[3]);
                 break;
             default:
                 throw new Error("An unknown combination of parameters has been passed.");
@@ -110,6 +134,7 @@ module.exports = (function ()
         }
 
         Error.call(thisRef, message);
+        thisRef.message = message;
 
         thisRef.status = status;
         thisRef.headers = new HttpHeaderMap({

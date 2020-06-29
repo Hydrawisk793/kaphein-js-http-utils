@@ -36,6 +36,18 @@ export declare class HttpError extends Error
         body : any
     );
 
+    /**
+     *  @param body A HTTP response body.  
+     *  Any `undefined` values will be treated as a `null` value.  
+     *  The body will not be cloned but referenced by the error object.
+     */
+    public constructor(
+        status : number,
+        message : string,
+        headers : Record<string, string> | Iterable<[string, string]> | null,
+        body : any
+    );
+
     public readonly status : number;
 
     public readonly headers : HttpHeaderMap;
