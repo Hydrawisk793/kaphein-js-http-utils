@@ -116,6 +116,44 @@ describe("HttpError", function ()
         });
     });
 
+    describe("construction with a status, a message, headers and a body", function ()
+    {
+        const status = 401;
+        const msg = "An error message";
+        const bodyErrorMsg = "A body error message";
+        const headers = {
+            "Content-Type" : mineTypeAppJson
+        };
+        const body = {
+            "error" : {
+                "message" : bodyErrorMsg
+            }
+        };
+        const res = new HttpError(status, msg, headers, body);
+
+        it(`should set status code to ${ status }`, function ()
+        {
+            assert.equal(res.status, status, `'status' must be ${ status }.`);
+        });
+
+        it(`should set message to ${ msg }`, function ()
+        {
+            assert.equal(res.message, msg, `'message' must be ${ msg }.`);
+        });
+
+        it("should set 'Content-Type' header and body.", function ()
+        {
+            assert.notEqual(res.headers.toRecord("train"), headers, "headers must be cloned.");
+            assert.deepEqual(res.headers.toRecord("train"), headers, `'headers' must be deep-equal to '${ headers }'.`);
+
+            assert.isObject(res.body, "'body' must be an object.");
+            assert.deepEqual(res.body, body, `'body' must be deep-equal to '${ body }'.`);
+            assert.equal(res.body, body, `'body' must be same as '${ body }'.`);
+            assert.equal(res.body.error.message, bodyErrorMsg, `body.error.message must be same as ${ bodyErrorMsg }.`);
+            assert.notEqual(res.body.error.message, msg, `body.error.message must be same as ${ bodyErrorMsg }.`);
+        });
+    });
+
     describe("copy construction", function ()
     {
         const status = 401;

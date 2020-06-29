@@ -78,6 +78,24 @@ module.exports = (function ()
                 this.headers = new HttpHeaderMap(arguments[1]);
                 this.body = (isUndefinedOrNull(arguments[2]) ? null : arguments[2]);
                 break;
+            case 4:
+                if(!Number.isSafeInteger(arguments[0]))
+                {
+                    throw new TypeError("'status' must be a safe integer.");
+                }
+
+                message = arguments[1];
+                if(!isString(message))
+                {
+                    throw new TypeError("'message', must be a string");
+                }
+                Error.call(this, message);
+                this.message = message;
+
+                this.status = arguments[0];
+                this.headers = new HttpHeaderMap(arguments[2]);
+                this.body = (isUndefinedOrNull(arguments[3]) ? null : arguments[3]);
+                break;
             default:
                 throw new Error("An unknown combination of parameters has been passed.");
             }
