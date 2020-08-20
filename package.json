@@ -5,6 +5,7 @@
     "author": "Hydrawisk793",
     "license": "MIT",
     "main": "src/index.js",
+    "types": "src/index.d.ts",
     "scripts": {
         "lint": "tsc --project tsconfig.dts.json && eslint src/**/*.js",
         "lint:fix": "npm run lint -- --fix",
