@@ -4,8 +4,20 @@
     "description": "",
     "author": "Hydrawisk793",
     "license": "MIT",
-    "main": "src/index.js",
-    "types": "src/index.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "keywords": [],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Hydrawisk793/kaphein-js-http-utils.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Hydrawisk793/kaphein-js-http-utils/issues"
+    },
+    "homepage": "https://github.com/Hydrawisk793/kaphein-js-http-utils#readme",
     "scripts": {
         "lint": "tsc --project tsconfig.dts.json && eslint src/**/*.js",
         "lint:fix": "npm run lint -- --fix",
