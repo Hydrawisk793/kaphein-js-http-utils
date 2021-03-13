@@ -1,6 +1,6 @@
 {
     "name": "kaphein-js-http-utils",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "",
     "author": "Hydrawisk793",
     "license": "MIT",
@@ -9,17 +9,25 @@
     "scripts": {
         "lint": "tsc --project tsconfig.dts.json && eslint src/**/*.js",
         "lint:fix": "npm run lint -- --fix",
-        "test": "mocha tests"
+        "test": "mocha tests",
+        "build": "rm -rf dist && npm run lint && npm run test && webpack --mode production --config webpack.config.js",
+        "prepack": "npm install && npm run build"
     },
     "bundleDependencies": [],
     "dependencies": {
-        "kaphein-js": "^0.13.0"
+        "kaphein-js-collection": "~0.1.0",
+        "kaphein-js-object-utils": "~0.1.0",
+        "kaphein-js-type-trait": "~0.1.0"
     },
     "devDependencies": {
         "chai": "^4.2.0",
+        "copy-webpack-plugin": "^8.0.0",
         "eslint": "^7.0.0",
         "husky": "^2.7.0",
         "mocha": "^8.1.1",
-        "typescript": "^3.9.7"
+        "typescript": "^3.9.7",
+        "webpack": "^5.25.0",
+        "webpack-cli": "^4.5.0",
+        "webpack-node-externals": "^2.5.2"
     }
 }

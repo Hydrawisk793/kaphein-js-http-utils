@@ -1,7 +1,9 @@
-var isNonNullObject = require("kaphein-js").isNonNullObject;
-var isString = require("kaphein-js").isString;
-var isIterable = require("kaphein-js").isIterable;
-var StringKeyMap = require("kaphein-js").StringKeyMap;
+var kapheinJsTypeTrait = require("kaphein-js-type-trait");
+var isNonNullObject = kapheinJsTypeTrait.isNonNullObject;
+var isString = kapheinJsTypeTrait.isString;
+var isIterable = kapheinJsTypeTrait.isIterable;
+var kapheinJsCollection = require("kaphein-js-collection");
+var StringKeyMap = kapheinJsCollection.StringKeyMap;
 
 module.exports = (function ()
 {
