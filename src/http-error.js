@@ -1,6 +1,9 @@
-var extendClass = require("kaphein-js").extendClass;
-var isUndefinedOrNull = require("kaphein-js").isUndefinedOrNull;
-var isString = require("kaphein-js").isString;
+var kapheinJsTypeTrait = require("kaphein-js-type-trait");
+var isDefinedAndNotNull = kapheinJsTypeTrait.isDefinedAndNotNull;
+var isString = kapheinJsTypeTrait.isString;
+var kapheinJsObjectUtils = require("kaphein-js-object-utils");
+var extendClass = kapheinJsObjectUtils.extendClass;
+
 var HttpHeaderMap = require("./http-header-map").HttpHeaderMap;
 
 module.exports = (function ()
@@ -76,7 +79,7 @@ module.exports = (function ()
 
                 this.status = arguments[0];
                 this.headers = new HttpHeaderMap(arguments[1]);
-                this.body = (isUndefinedOrNull(arguments[2]) ? null : arguments[2]);
+                this.body = (isDefinedAndNotNull(arguments[2]) ? arguments[2] : null);
                 break;
             case 4:
                 if(!Number.isSafeInteger(arguments[0]))
@@ -94,7 +97,7 @@ module.exports = (function ()
 
                 this.status = arguments[0];
                 this.headers = new HttpHeaderMap(arguments[2]);
-                this.body = (isUndefinedOrNull(arguments[3]) ? null : arguments[3]);
+                this.body = (isDefinedAndNotNull(arguments[3]) ? arguments[3] : null);
                 break;
             default:
                 throw new Error("An unknown combination of parameters has been passed.");
